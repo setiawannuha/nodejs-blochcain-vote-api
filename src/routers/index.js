@@ -22,4 +22,6 @@ router.get('/api/vote/:voteid', auth, isUser, voteController.get)
 router.post('/api/vote/:voteid', auth, isUser, voteController.create)
 router.post('/api/vote', auth, isUser, voteController.vote)
 
+router.get('/api/me', auth, authController.me)
+
 module.exports = router

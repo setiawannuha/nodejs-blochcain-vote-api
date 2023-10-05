@@ -8,11 +8,11 @@ const senderAddress = SENDERADDRESS;
 const contract = new web3.eth.Contract(contractABI.abi, contractAddress)
 
 module.exports = {
-  createCandidate: async (_voteId, _candidateId, _candidateName) => {
+  createCandidate: async (_voteId, _voteName, _candidateId, _candidateName) => {
     try {
-      const encodedData = await contract.methods.initVoting(_voteId, _candidateId, _candidateName).encodeABI()
-      const estimatedGas = await contract.methods.initVoting(_voteId, _candidateId, _candidateName).estimateGas({ from: senderAddress, data: encodedData })
-      const transaction = await contract.methods.initVoting(_voteId, _candidateId, _candidateName).send({
+      const encodedData = await contract.methods.initVoting(_voteId, _voteName, _candidateId, _candidateName).encodeABI()
+      const estimatedGas = await contract.methods.initVoting(_voteId, _voteName, _candidateId, _candidateName).estimateGas({ from: senderAddress, data: encodedData })
+      const transaction = await contract.methods.initVoting(_voteId, _voteName, _candidateId, _candidateName).send({
         from: senderAddress,
         data: encodedData,
         gas: estimatedGas

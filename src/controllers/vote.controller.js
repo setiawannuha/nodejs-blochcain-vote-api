@@ -23,7 +23,7 @@ module.exports = {
   create: async(req, res) => {
     try {
       const voteid = req.params.voteid
-      const {candidates} = req.body
+      const {candidates, voteName} = req.body
       const candidatesData = []
       for (let i = 0; i < candidates.length; i++) {
         const candidate = await Candidate.findOne({candidateId: candidates[i]})
@@ -35,6 +35,7 @@ module.exports = {
       for (let i = 0; i < candidatesData.length; i++) {
         const status = await createCandidate(
           voteid, 
+          voteName, 
           candidatesData[i].candidateId, 
           candidatesData[i].candidateName);
         if(!status){

@@ -26,5 +26,16 @@ module.exports = {
         message: "Internal Server Error"
       })
     }
+  },
+  me: async(req, res) => {
+    try {
+      const user = req.userData;
+      return res.status(200).json({data: user})
+    } catch (error) {
+      return res.status(500).json({
+        error,
+        message: "Internal Server Error"
+      })
+    }
   }
 }

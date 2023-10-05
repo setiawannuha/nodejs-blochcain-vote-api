@@ -1,8 +1,10 @@
 pragma solidity ^0.8.19;
 contract Voting {
   uint public voteIdActive;
+  string public voteNameActive;
   struct VotingItem {
     uint voteId;
+    string voteName;
     uint candidateId;
     string candidateName;
     int voteTotal;
@@ -18,10 +20,11 @@ contract Voting {
   event VotingResult(bool success);
 
   // init voting app (activated vote id and create candidate)
-  function initVoting(uint _voteId, uint _candidateId, string memory _candidateName) public {
+  function initVoting(uint _voteId, string memory _voteName, uint _candidateId, string memory _candidateName) public {
     bool isError = false;
     bool candidateIdExixts = false;
     voteIdActive = _voteId;
+    voteNameActive = _voteName;
     for (uint256 i = 0; i < votings.length; i++) {
       if(voteIdActive == votings[i].voteId && _candidateId == votings[i].candidateId){
         candidateIdExixts = true;
@@ -30,7 +33,7 @@ contract Voting {
       }
     }
     if(candidateIdExixts == false){
-      VotingItem memory newVotingCandidate = VotingItem(voteIdActive, _candidateId, _candidateName, 0);
+      VotingItem memory newVotingCandidate = VotingItem(voteIdActive, voteNameActive, _candidateId, _candidateName, 0);
       votings.push(newVotingCandidate);
     }
     emit VotingResult(!isError);
