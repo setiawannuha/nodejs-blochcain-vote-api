@@ -5,12 +5,20 @@ module.exports = {
     try {
       const voteid = req.params.voteid
       const votings = await getVoting(parseInt(voteid))
-      const result = votings.map(item => ({
-        voteId: item.voteId.toString(),
-        candidateId: item.candidateId.toString(),
-        candidateName: item.candidateName,
-        voteTotal: item.voteTotal.toString(),
-      }));
+      const votingResult = votings.map(async(item) => {
+        const candidate = await Candidate.findOne({
+          candidateId: item.candidateId.toString()
+        })
+        return {
+          voteId: item.voteId.toString(),
+          voteName: item.voteName,
+          candidateId: item.candidateId.toString(),
+          candidateName: item.candidateName,
+          voteTotal: item.voteTotal.toString(),
+          picture: candidate.picture
+        }
+      });
+      const result = await await Promise.all(votingResult)
       return res.status(200).json({data: result})
     } catch (error) {
       console.log(error);

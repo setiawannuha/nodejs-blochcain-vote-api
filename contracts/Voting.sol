@@ -16,10 +16,8 @@ contract Voting {
     uint candidateId;
   }
   VoterItem[] public voters;
-
   event VotingResult(bool success);
-
-  // init voting app (activated vote id and create candidate)
+  // init voting
   function initVoting(uint _voteId, string memory _voteName, uint _candidateId, string memory _candidateName) public {
     bool isError = false;
     bool candidateIdExixts = false;
@@ -38,7 +36,6 @@ contract Voting {
     }
     emit VotingResult(!isError);
   }
-
   function voteCandidate(uint _userId, uint _candidateId) public {
     bool isError = false;
     bool voterExists = false;
@@ -81,8 +78,6 @@ contract Voting {
     }
     emit VotingResult(!isError);
   }
-
-  
   function getVoting(uint _voteId) public view returns (VotingItem[] memory) {
     VotingItem[] memory filteredVotings = new VotingItem[](votings.length);
     uint256 filteredVotingsCount = 0;

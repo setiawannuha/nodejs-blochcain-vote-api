@@ -1,12 +1,10 @@
 const {Web3} = require('web3')
 const contractABI = require("../../build/contracts/Voting.json")
 const {CONTRACTADDRESS, WEB3URL, SENDERADDRESS} = require('../helpers/env')
-
 const web3 = new Web3(WEB3URL)
-const contractAddress = CONTRACTADDRESS
+const contractAddress = "0xbA509dC188BFc68c2758bA14d4c9e1370aa05945"
 const senderAddress = SENDERADDRESS;
 const contract = new web3.eth.Contract(contractABI.abi, contractAddress)
-
 module.exports = {
   createCandidate: async (_voteId, _voteName, _candidateId, _candidateName) => {
     try {

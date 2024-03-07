@@ -19,7 +19,7 @@ router.put('/api/candidate/:id', auth, isAdmin, parser.single('picture'), candid
 router.delete('/api/candidate/:id', auth, isAdmin, candidateController.destroy)
 
 router.get('/api/vote/:voteid', auth, isUser, voteController.get)
-router.post('/api/vote/:voteid', auth, isUser, voteController.create)
+router.post('/api/vote/:voteid', auth, isAdmin, voteController.create)
 router.post('/api/vote', auth, isUser, voteController.vote)
 
 router.get('/api/me', auth, authController.me)
